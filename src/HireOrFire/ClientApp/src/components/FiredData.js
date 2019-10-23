@@ -34,18 +34,17 @@ export class FiredData extends Component {
       </table>
     );
   }
-  
 
   render() {
-  
-    const fired = this.state.applicants.filter(applicant => applicant.hired === false)
+    const skiped = this.state.applicants.filter(
+      applicant => applicant.skiped === true
+    );
     let contents = this.state.loading ? (
       <p>
         <em>Loading...</em>
       </p>
     ) : (
-      
-      FiredData.renderApplicantsTable(fired)
+      FiredData.renderApplicantsTable(skiped)
     );
 
     return (
@@ -61,6 +60,6 @@ export class FiredData extends Component {
     const response = await fetch('applicants/all');
     const data = await response.json();
     this.setState({ applicants: data, loading: false });
-    console.log(this.state)
+    console.log(this.state);
   }
 }

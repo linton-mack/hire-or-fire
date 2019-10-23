@@ -10,8 +10,8 @@ namespace HireOrFire.Model
         {
             Applicants = new List<ApplicantsDto>
             {
-                new ApplicantsDto("1", "Jim", true),
-                new ApplicantsDto("2", "Linton", false)
+                new ApplicantsDto("1", "Jim", false, false),
+                new ApplicantsDto("2", "Linton", false, false)
             };
         }
     }
