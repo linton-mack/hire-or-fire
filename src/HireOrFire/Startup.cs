@@ -1,3 +1,4 @@
+using HireOrFire.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,6 +23,7 @@ namespace HireOrFire
         {
 
             services.AddControllersWithViews();
+            services.AddSingleton<IDataStore, DataStore>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

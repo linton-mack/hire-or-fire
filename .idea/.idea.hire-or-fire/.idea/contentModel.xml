@@ -94,9 +94,15 @@
             </e>
           </e>
           <e p="Controllers" t="Include">
+            <e p="ApplicantsController.cs" t="Include" />
             <e p="WeatherForecastController.cs" t="Include" />
           </e>
           <e p="HireOrFire.csproj" t="IncludeRecursive" />
+          <e p="Model" t="Include">
+            <e p="ApplicantsDto.cs" t="Include" />
+            <e p="DataStore.cs" t="Include" />
+            <e p="IDataStore.cs" t="Include" />
+          </e>
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
               <e p="netcoreapp3.0" t="Include">
