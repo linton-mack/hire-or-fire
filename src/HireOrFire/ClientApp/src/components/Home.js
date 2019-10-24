@@ -22,11 +22,10 @@ export class Home extends Component {
         applicant => applicant.hired === false && applicant.skip === false
       )
     }));
-
   };
 
-  renderApplicantsTable = applicant => {   
-     console.log(this.state);
+  renderApplicantsTable = applicant => {
+    console.log(this.state);
     if (applicant === undefined) {
       return <p>No applicants here fool!</p>;
     } else {
@@ -49,7 +48,6 @@ export class Home extends Component {
             </tbody>
           </table>
           <button onClick={() => this.hiredButton()}>Hire this bad boy</button>
-
           <button onClick={this.handleclick}>Skip on this fool</button>
         </div>
       );

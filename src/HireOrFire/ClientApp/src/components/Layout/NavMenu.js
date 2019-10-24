@@ -12,16 +12,7 @@ import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
-  static displayName = NavMenu.name;
-
-  constructor(props) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
+  state = { collapsed: true };
 
   toggleNavbar() {
     this.setState({
@@ -38,7 +29,7 @@ export class NavMenu extends Component {
         >
           <Container>
             <NavbarBrand tag={Link} to="/">
-              HireOrFire
+              Hire Or Fire
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse

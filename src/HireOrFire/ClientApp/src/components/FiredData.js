@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 
 export class FiredData extends Component {
-  static displayName = FiredData.name;
-
-  constructor(props) {
-    super(props);
-    this.state = { applicants: [], loading: true };
-  }
+  state = { applicants: [], loading: true };
 
   componentDidMount() {
     this.populateApplicantsData();
   }
 
-  static renderApplicantsTable(applicants) {
+  renderApplicantsTable(applicants) {
     return (
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
@@ -44,7 +39,7 @@ export class FiredData extends Component {
         <em>Loading...</em>
       </p>
     ) : (
-      FiredData.renderApplicantsTable(skiped)
+      this.renderApplicantsTable(skiped)
     );
 
     return (

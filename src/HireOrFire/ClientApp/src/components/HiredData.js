@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 
 export class HiredData extends Component {
-  static displayName = HiredData.name;
-
-  constructor(props) {
-    super(props);
-    this.state = { applicants: [], loading: true };
-  }
+  state = { applicants: [], loading: true };
 
   componentDidMount() {
     this.populateApplicantsData();
   }
 
-  static renderApplicantsTable(applicants) {
+  renderApplicantsTable(applicants) {
     return (
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
@@ -34,15 +29,17 @@ export class HiredData extends Component {
       </table>
     );
   }
-  
+
   render() {
-    const hired = this.state.applicants.filter(applicant => applicant.hired === true)
+    const hired = this.state.applicants.filter(
+      applicant => applicant.hired === true
+    );
     let contents = this.state.loading ? (
       <p>
         <em>Loading...</em>
       </p>
     ) : (
-      HiredData.renderApplicantsTable(hired)
+      this.renderApplicantsTable(hired)
     );
 
     return (
@@ -58,6 +55,6 @@ export class HiredData extends Component {
     const response = await fetch('applicants/all');
     const data = await response.json();
     this.setState({ applicants: data, loading: false });
-    console.log(this.state)
+    console.log(this.state);
   }
 }
