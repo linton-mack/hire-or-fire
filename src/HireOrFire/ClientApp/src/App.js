@@ -17,6 +17,7 @@ export default class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/counter" component={Counter} />
         <Route path="/all" component={AllData} />
+        {/* <Route path="/hired" render={(props) => <HiredData {...props} stuff ={this.state.} />}/> */}
         <Route path="/hired" component={HiredData} />
         <Route path="/fired" component={FiredData} />
       </Layout>

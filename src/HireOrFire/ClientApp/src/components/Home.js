@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 
+const fs = require('fs');
+
 export class Home extends Component {
   state = { applicants: [], loading: true, applicant: null };
+
+  writeToFile = () => {
+    console.log('Morning world');
+    let hiredApplicant = {
+      id: this.state.applicant.id,
+      name: this.state.applicant.name,
+      hired: this.state.applicant.hired,
+      skip: this.state.applicant.skip
+    };
+
+    let data = JSON.stringify(hiredApplicant);
+    fs.writeFile('hired.json', data);
+  };
 
   componentDidMount() {
     this.populateApplicantsData();
@@ -12,6 +27,7 @@ export class Home extends Component {
     this.setState(prevState => ({
       applicant: (prevState.applicant.hired = true)
     }));
+    this.writeToFile();
     this.setAgain();
     // console.log(this.state);
   };

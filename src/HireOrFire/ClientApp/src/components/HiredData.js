@@ -52,9 +52,9 @@ export class HiredData extends Component {
   }
 
   async populateApplicantsData() {
-    const response = await fetch('applicants/all');
-    const data = await response.json();
-    this.setState({ applicants: data, loading: false });
-    console.log(this.state);
+    // const response = await fetch('applicants/all');
+    // const data = await response.json();
+    // this.setState({ applicants: data, loading: false });
+    console.log(this.props);
   }
 }
