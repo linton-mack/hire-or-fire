@@ -4,38 +4,30 @@ using HireOrFire.Model;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HireOrFire.Controllers {
+namespace HireOrFire.Controllers
+{
     [ApiController]
-    [Route ("[controller]")]
-    public class ApplicantsController : ControllerBase {
+    [Route("[controller]")]
+    public class ApplicantsController : ControllerBase
+    {
 
         private IDataStore myData;
 
-        public ApplicantsController (IDataStore dataStore) {
+        public ApplicantsController(IDataStore dataStore)
+        {
             myData = dataStore;
         }
 
-        [HttpGet ("all")]
-        public JsonResult GetAllApplicants () {
-            return new JsonResult (myData.Applicants);
+        [HttpGet("all")]
+        public JsonResult GetAllApplicants()
+        {
+            return new JsonResult(myData.Applicants);
         }
 
-        [HttpGet ("hiredall")]
-        public JsonResult GetAllHiredApplicants () {
-            return new JsonResult (myData.HiredApplicants);
-        }
-        
-        [HttpPost ("/hired")]
-        public IActionResult PostApplicantToHired ([FromBody]ApplicantsDto hiredApplicant) {
-            ApplicantsDto applicantHired = myData.AddNewHiredApplicant(hiredApplicant);
-            if(ModelState.IsValid)
-            {
-                return CreatedAtAction(nameof(GetApplicantById), applicantHired);
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+        [HttpGet("hiredall")]
+        public JsonResult GetAllHiredApplicants()
+        {
+            return new JsonResult(myData.HiredApplicants);
         }
 
         [HttpGet("{id}")]
@@ -51,6 +43,23 @@ namespace HireOrFire.Controllers {
                 return NotFound();
             }
         }
+
+        [HttpPost("hired")]
+        public IActionResult PostApplicantToHired([FromBody]ApplicantsDto hiredApplicant)
+        {
+            ApplicantsDto applicantHired = myData.AddNewHiredApplicant(hiredApplicant);
+
+            if (ModelState.IsValid)
+            {
+                ApplicantsDto.writeToFile(hiredApplicant);
+                return CreatedAtAction(nameof(GetApplicantById), new { id = applicantHired.Id }, applicantHired);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
 
     }
 }
