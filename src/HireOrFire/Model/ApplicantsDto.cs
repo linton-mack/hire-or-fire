@@ -27,9 +27,6 @@ namespace HireOrFire.Model
             try
             {
                 var data = JsonConvert.SerializeObject(applicant);
-                // var data = JObject.Parse(applicant);
-                // Console.WriteLine("i am data:", data);
-                // /Users/jimhiggins/academy/Code/northCodersC#/hire-or-fire/src/HireOrFire/Model/JsonData
                 File.WriteAllText("/Users/jimhiggins/academy/Code/northCodersC#/hire-or-fire/src/HireOrFire/Model/JsonData/data.json", data);
             }
             catch (Exception e)
@@ -37,9 +34,7 @@ namespace HireOrFire.Model
                 Console.WriteLine("-------------ERROR---------------");
                 Console.WriteLine(applicant.Name);
                 Console.WriteLine(JsonConvert.SerializeObject(applicant));
-                // Console.WriteLine(String.IsNullOrWhiteSpace(applicant));
             }
         }
-
     }
 }

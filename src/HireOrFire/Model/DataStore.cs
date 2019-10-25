@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace HireOrFire.Model
 {
@@ -17,7 +19,7 @@ namespace HireOrFire.Model
 
         public ApplicantsDto GetApplicantById(string id)
         {
-            return Applicants.FirstOrDefault((applicant) => applicant.Id ==  id);
+            return Applicants.FirstOrDefault((applicant) => applicant.Id == id);
         }
 
         public DataStore()
@@ -28,11 +30,31 @@ namespace HireOrFire.Model
                 new ApplicantsDto("2", "Linton", false, false)
             };
 
-            HiredApplicants = new List<ApplicantsDto>()
-            {
-                new ApplicantsDto("1", "Polly", true, false),
-                new ApplicantsDto("2", "Petunia", true, false)
+            HiredApplicants = new List<ApplicantsDto>{
+       
             };
+            // HiredApplicants = GenerateHiredApplicantsList();
+        }
+
+        public static List<ApplicantsDto> GenerateHiredApplicantsList()
+        {
+            List<ApplicantsDto> hiredAppList = new List<ApplicantsDto>();
+            var rawText = File.ReadAllText("/Users/jimhiggins/academy/Code/northCodersC#/hire-or-fire/src/HireOrFire/Model/JsonData/data.json");
+            var jsonArray = JArray.Parse(rawText);
+
+            foreach (JObject obj in jsonArray.Children<JObject>())
+            {
+                dynamic mrdragon = JObject.Parse(obj.ToString());
+
+                string id = mrdragon.Id;
+                string name = mrdragon.Name;
+                bool hired = mrdragon.Hired;
+                bool skip = mrdragon.Skip;
+
+                ApplicantsDto hiredApplicantToAdd = new ApplicantsDto(id, name, hired, skip);
+                hiredAppList.Add(hiredApplicantToAdd);
+            }
+            return hiredAppList;
         }
     }
 }
