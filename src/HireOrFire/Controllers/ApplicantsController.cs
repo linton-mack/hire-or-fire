@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using HireOrFire.Model;
 using Microsoft.AspNetCore.Components.Routing;
@@ -19,11 +20,35 @@ namespace HireOrFire.Controllers {
             return new JsonResult (myData.Applicants);
         }
 
-        [HttpPost ("hired/add")]
-        public IActionResult PostApplicantToHired (CreateHiredApplicantDto hiredApplicant) {
+        [HttpGet ("hiredall")]
+        public JsonResult GetAllHiredApplicants () {
+            return new JsonResult (myData.HiredApplicants);
+        }
+        
+        [HttpPost ("/hired")]
+        public IActionResult PostApplicantToHired ([FromBody]ApplicantsDto hiredApplicant) {
             ApplicantsDto applicantHired = myData.AddNewHiredApplicant(hiredApplicant);
-            if(ModelState.IsValid){
-                return CreatedAtAction(nameof(GetApplicantById), new applicantHired)
+            if(ModelState.IsValid)
+            {
+                return CreatedAtAction(nameof(GetApplicantById), applicantHired);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetApplicantById(string id)
+        {
+            var applicant = myData.GetApplicantById(id);
+            if (applicant != null)
+            {
+                return Ok(applicant);
+            }
+            else
+            {
+                return NotFound();
             }
         }
 

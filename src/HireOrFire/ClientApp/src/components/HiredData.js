@@ -31,7 +31,9 @@ export class HiredData extends Component {
   }
 
   render() {
-    const hired = this.state.applicants.filter(
+      console.log("console loggy", this.state);
+
+      const hired = this.state.applicants.filter(
       applicant => applicant.hired === true
     );
     let contents = this.state.loading ? (
@@ -52,9 +54,9 @@ export class HiredData extends Component {
   }
 
   async populateApplicantsData() {
-    // const response = await fetch('applicants/all');
-    // const data = await response.json();
-    // this.setState({ applicants: data, loading: false });
+    const response = await fetch('applicants/hiredall');
+    const data = await response.json();
+    this.setState({ applicants: data, loading: false });
     console.log(this.props);
   }
 }
